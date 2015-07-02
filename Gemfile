@@ -1,3 +1,4 @@
+# FIXME (cmhobbs) add hard coded versions, jerk.
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'
@@ -13,6 +14,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'grape'
 gem "hashie-forbidden_attributes"
 gem 'puma'
+
+gem 'slim-rails'
 
 group :development, :test do
   gem 'byebug'
