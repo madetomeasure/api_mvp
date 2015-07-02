@@ -17,6 +17,10 @@ gem 'puma'
 
 gem 'slim-rails'
 
+group :development do
+  gem 'annotate'
+end
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

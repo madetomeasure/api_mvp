@@ -5,8 +5,10 @@ module MadeToMeasure
     prefix  'api'
     version 'v0.1', :using => :path
 
+    format :json
+
     get :status do 
-      { greeting: 'my hovercraft is full of eels' }
+      { status: 'my hovercraft is full of eels' }
     end
 
     rescue_from ActiveRecord::RecordNotFound do |e|
@@ -23,7 +25,8 @@ module MadeToMeasure
       }.to_json, 500).finish
     end
 
-    # mount M2M::Subscribers, etc.
+    mount MadeToMeasure::Subscribers
+
   end
 
 end
