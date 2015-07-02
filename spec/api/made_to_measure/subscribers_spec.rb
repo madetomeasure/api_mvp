@@ -6,11 +6,10 @@ describe 'MadeToMeasure::Subscribers' do
 
     let(:name)  { 'Flap Flappington, III' }
     let(:email) { 'flap@flappington.com' }
+    let(:subscribers_path) { '/api/v0.1/subscribers' }
+    let(:subscriber_path) { "/api/v0.1/subscribers/#{subscriber.id}" }
 
     describe 'POST /subscribers' do
-
-      let(:subscribers_path) { '/api/v0.1/subscribers' }
-
       let(:payload) do
         {name: name, email: email}
       end
@@ -23,9 +22,6 @@ describe 'MadeToMeasure::Subscribers' do
     end
 
     describe 'DELETE /subscribers/:id' do
-
-      let(:subscriber_path) { "/api/v0.1/subscribers/#{subscriber.id}" }
-
       let(:subscriber) do
         Subscriber.create!(name: name, email: email)
       end
@@ -35,6 +31,23 @@ describe 'MadeToMeasure::Subscribers' do
         result = Subscriber.exists?(id: subscriber.id) 
         
         expect(result).to be_falsey
+      end
+    end
+
+    describe 'GET /subscribers' do
+      let!(:subscriber) do
+        Subscriber.create!(name: name, email: email)
+      end
+
+      it 'returns a list of subscribers' do
+        get subscribers_path
+
+        expect(response.body).to include(subscriber.to_json)
+      end
+
+      it 'paginates' do
+        get subscribers_path, page: 2
+        expect(response.body).to eq('[]')
       end
     end
 

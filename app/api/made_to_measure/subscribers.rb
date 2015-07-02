@@ -22,6 +22,14 @@ module MadeToMeasure
       Subscriber.find(params[:id]).destroy!
     end
 
+    desc 'Get a list of subscribers'
+    params do
+      optional :page, type: Integer, desc: 'Page number'
+    end
+    get '/subscribers' do
+      Subscriber.page(params[:page])
+    end
+
   end
 
 end
