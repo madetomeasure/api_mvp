@@ -1,14 +1,15 @@
 default: &default
   adapter: postgresql
+  database: madetomeasure
+  host: localhost
   encoding: unicode
   pool: 5
-  username: pair
-  password: 0mgp41r
+  username: root 
+  password: 
 
 development:
   <<: *default
-  database: api_mvp_development
 
 test:
   <<: *default
-  database: api_mvp_test
+  database: madetomeasure_test
