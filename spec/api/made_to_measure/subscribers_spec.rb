@@ -51,6 +51,18 @@ describe 'MadeToMeasure::Subscribers' do
       end
     end
 
+    describe 'POST /subscribers/:id' do
+      let(:subscriber) do
+        Subscriber.create!(name: name, email: email)
+      end
+
+      it 'updates a persons name' do
+        name_change = 'Flap Johnson'
+        post subscriber_path, name: name_change
+        expect(response.body).to include(name_change)
+        expect(subscriber.reload.name).to eq(name_change)
+      end
+    end
   end
 
 end

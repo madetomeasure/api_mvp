@@ -30,6 +30,19 @@ module MadeToMeasure
       Subscriber.page(params[:page])
     end
 
+    desc 'Update a single subscriber'
+    params do
+      requires :name, type: String, desc: 'The subscribers name'
+    end
+    post '/subscribers/:id' do
+      # Seems crazy but email is a write only object
+      # Or maybe it shouldn't be?
+      # TODO
+      Subscriber.find(params[:id]).tap {|s|
+        s.update_column(:name, params[:name])
+      }
+    end
+
   end
 
 end
