@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702205605) do
+ActiveRecord::Schema.define(version: 20150706233846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "message_headers", force: :cascade do |t|
+    t.string   "key",        null: false
+    t.string   "value",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "parent_message_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "subscribers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -25,4 +39,5 @@ ActiveRecord::Schema.define(version: 20150702205605) do
 
   add_index "subscribers", ["email"], name: "index_subscribers_on_email", unique: true, using: :btree
 
+  add_foreign_key "messages", "messages", column: "parent_message_id"
 end
