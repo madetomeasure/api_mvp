@@ -39,7 +39,7 @@ module MadeToMeasure
       # Or maybe it shouldn't be?
       # TODO
       Subscriber.find(params[:id]).tap {|s|
-        s.update_column(:name, params[:name])
+        s.update_attribute(:name, params[:name])
       }
     end
 
