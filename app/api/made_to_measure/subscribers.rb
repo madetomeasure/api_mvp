@@ -38,9 +38,9 @@ module MadeToMeasure
       # Seems crazy but email is a write only object
       # Or maybe it shouldn't be?
       # TODO
-      Subscriber.find(params[:id]).tap {|s|
-        s.update_attribute(:name, params[:name])
-      }
+      subscriber = Subscriber.find(params[:id])
+      subscriber.update_attribute(:name, params[:name])
+      subscriber
     end
 
   end
