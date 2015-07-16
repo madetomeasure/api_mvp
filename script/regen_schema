@@ -1,0 +1,2 @@
+#! /bin/sh
+bundle exec rake db:drop db:create db:migrate RAILS_ENV=test
