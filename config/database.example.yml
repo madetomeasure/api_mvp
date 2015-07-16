@@ -1,0 +1,15 @@
+default: &default
+  adapter: postgresql
+  database: madetomeasure
+  host: localhost
+  encoding: unicode
+  pool: 5
+  username: root 
+  password: 
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  database: madetomeasure_test

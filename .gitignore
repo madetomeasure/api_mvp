@@ -14,3 +14,4 @@
 .gem/*
 .keep
 *.swp
+config/database.yml
