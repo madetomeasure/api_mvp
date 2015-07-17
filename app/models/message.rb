@@ -1,3 +1,8 @@
+# Message has a subject and parts
+# 
+# Subject follows a convention of only being 77 characters or less
+# http://stackoverflow.com/questions/1592291/what-is-the-email-subject-length-limit
+#
 class Message < ActiveRecord::Base
   has_many :parts, class_name: 'MessagePart', autosave: true
 
