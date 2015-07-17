@@ -26,6 +26,7 @@ module MadeToMeasure
     end
 
     mount MadeToMeasure::Subscribers
+    mount MadeToMeasure::Messages
 
   end
 

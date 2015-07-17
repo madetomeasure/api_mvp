@@ -2,10 +2,12 @@ class Message < ActiveRecord::Base
   has_many :parts, class_name: 'MessagePart', autosave: true
 
   def html=(text)
+    return unless text.present?
     parts.html.first_or_initialize(body: text)
   end
 
   def text=(text)
+    return unless text.present?
     parts.text.first_or_initialize(body: text)
   end
 
