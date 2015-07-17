@@ -1,7 +1,5 @@
 module MadeToMeasure
-
   class API < Grape::API
-
     prefix  'api'
     version 'v0.1', :using => :path
 
@@ -27,7 +25,5 @@ module MadeToMeasure
 
     mount MadeToMeasure::Subscribers
     mount MadeToMeasure::Messages
-
   end
-
 end
