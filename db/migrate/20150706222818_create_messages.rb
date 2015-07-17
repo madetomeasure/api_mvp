@@ -12,5 +12,6 @@ class CreateMessages < ActiveRecord::Migration
     end
 
     add_foreign_key :message_parts, :messages, column: :message_id
+    add_index :message_parts, [:message_id, :mime_type], unique: true
   end
 end

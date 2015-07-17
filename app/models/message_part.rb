@@ -1,10 +1,14 @@
 class MessagePart < ActiveRecord::Base
-  def multipart?
-    mime_type == ContentType.multipart
+  def self.html
+    where(mime_type: ContentType.html)
   end
 
-  def plaintext?
-    mime_type == ContentType.plaintext
+  def self.text
+    where(mime_type: ContentType.text)
+  end
+
+  def text?
+    mime_type == ContentType.text
   end
 
   def html?

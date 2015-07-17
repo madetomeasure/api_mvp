@@ -1,14 +1,14 @@
 class ContentType
   MULTIPART = "multipart/alternative"
-  PLAINTEXT = "text/plain"
+  TEXT = "text/plain"
   HTML = "text/html"
 
   def self.multipart
     MULTIPART
   end
 
-  def self.plaintext
-    PLAINTEXT
+  def self.text
+    TEXT
   end
 
   def self.html

@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20150706222818) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "message_parts", ["message_id", "mime_type"], name: "index_message_parts_on_message_id_and_mime_type", unique: true, using: :btree
+
   create_table "messages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
