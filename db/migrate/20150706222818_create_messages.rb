@@ -1,6 +1,8 @@
 class CreateMessages < ActiveRecord::Migration
   def change
     create_table :messages do |t|
+      # http://stackoverflow.com/questions/1592291/what-is-the-email-subject-length-limit
+      t.string :subject, limit: 77, null: false
       t.timestamps null: false
     end
 

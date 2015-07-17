@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe Message, type: :model do
   it "allows us to create messages and parts" do
-    msg = Message.create(html: "thing", text: "fun")
+    msg = Message.create(html: "thing", text: "fun", subject: "derp")
+    expect(msg.subject).to eql("derp")
     expect(msg.html_body).to eql("thing")
     expect(msg.text_body).to eql("fun")
   end
