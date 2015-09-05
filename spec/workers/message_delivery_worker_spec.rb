@@ -6,9 +6,9 @@ describe MessageDeliveryWorker do
   end
 
   it 'delivers message to each subscriber' do
-    message = Message.create!(subject: 'things', html: 'things', text: 'stufffs')
-    sub = Subscriber.create!(email: 'steve@steve.com', name: 'derp herp')
-    sub2 = Subscriber.create!(email: 'steve2@steve.com', name: 'derp herp')
+    message = Fabricate(:message)
+    sub = Fabricate(:subscriber)
+    sub2 = Fabricate(:subscriber)
 
     described_class.new.perform(message.id)
     d = ActionMailer::Base.deliveries
