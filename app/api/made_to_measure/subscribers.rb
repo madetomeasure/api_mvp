@@ -34,11 +34,6 @@ module MadeToMeasure
     end
     patch '/subscribers/:id' do
       UpdateSubscriber.with_existing(params)
-
-      SubscriberDatum.create(subscriber_id: params[:subscriber_id], traits: request.body.read)
-      subscriber = Subscriber.find(params[:id])
-      subscriber.update_attribute(:name, params[:name])
-      subscriber
     end
 
     desc 'Update single subscriber (destroy existing metadata)'

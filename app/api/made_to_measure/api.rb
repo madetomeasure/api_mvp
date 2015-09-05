@@ -8,7 +8,9 @@ module MadeToMeasure
 
     format :json
 
-    get :status do
+    formatter :json, Grape::Formatter::ActiveModelSerializers
+
+    get :status do 
       { status: 'my hovercraft is full of eels' }
     end
 

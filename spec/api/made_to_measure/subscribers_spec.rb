@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 describe 'MadeToMeasure::Subscribers' do
-  
+
   context 'v0.1' do
 
     let(:name)  { 'Flap Flappington, III' }
     let(:email) { 'flap@flappington.com' }
     let(:subscribers_path) { '/api/v0.1/subscribers' }
     let(:subscriber_path) { "/api/v0.1/subscribers/#{subscriber.id}" }
-    let(:subscriber_data_path) { "#{subscriber_path}/data" }
 
     describe 'POST /subscribers' do
       let(:payload) do
@@ -28,9 +27,9 @@ describe 'MadeToMeasure::Subscribers' do
       end
 
       it 'deletes a subscriber' do
-        delete subscriber_path 
-        result = Subscriber.exists?(id: subscriber.id) 
-        
+        delete subscriber_path
+        result = Subscriber.exists?(id: subscriber.id)
+
         expect(result).to be_falsey
       end
     end
@@ -40,47 +39,54 @@ describe 'MadeToMeasure::Subscribers' do
         Subscriber.create!(name: name, email: email)
       end
 
+      let(:subscriber_json) do
+        ::ActiveModel::ArraySerializer.new([subscriber]).to_json
+      end
+
       it 'returns a list of subscribers' do
         get subscribers_path
 
-        expect(response.body).to include(subscriber.to_json)
+        expect(response.body).to include(subscriber_json)
       end
 
       it 'paginates' do
         get subscribers_path, page: 2
-        expect(response.body).to eq('[]')
+        expect(response.body).to eq('{"subscribers":[]}')
       end
     end
 
-    describe 'POST /subscribers/:id' do
+    describe 'update a subscriber' do
       let(:subscriber) do
         Subscriber.create!(name: name, email: email)
       end
 
-      it 'updates a persons name' do
-        name_change = 'Flap Johnson'
-        post subscriber_path, name: name_change
-        expect(response.body).to include(name_change)
-        expect(subscriber.reload.name).to eq(name_change)
-      end
-    end
-
-    describe 'POST /subscribers/:id/data' do
-      let(:subscriber) do
-        Subscriber.create!(name: name, email: email)
+      let(:params) do
+        {
+          name: "New Name Flappington",
+          traits: {
+            zomg: "Stuff"
+          },
+          id: subscriber.id.to_s
+        }.as_json
       end
 
-      it 'adds data to the hole' do
-        random_info = {
-          likes_orange: true,
-          age: 28,
-          favorite_color: "green"
-        }.to_json
-        
-        post subscriber_data_path, random_info
+      context 'PUT /subscribers/:id' do
+        it 'updates a persons name' do
+          expect(UpdateSubscriber).to receive(:without_existing).with(params)
 
-        expect(SubscriberDatum.count).to eq(1)
+          put subscriber_path, params
+        end
+
       end
+
+      describe 'PATCH /subscribers/:id' do
+        it 'updates a persons name' do
+          expect(UpdateSubscriber).to receive(:with_existing).with(params)
+
+          patch subscriber_path, params
+        end
+      end
+
     end
   end
 end
