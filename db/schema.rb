@@ -11,10 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150702205605) do
+ActiveRecord::Schema.define(version: 20150706222818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "message_parts", force: :cascade do |t|
+    t.string   "mime_type",  null: false
+    t.text     "body",       null: false
+    t.integer  "message_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "message_parts", ["message_id", "mime_type"], name: "index_message_parts_on_message_id_and_mime_type", unique: true, using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.string   "subject",    limit: 77, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "subscribers", force: :cascade do |t|
     t.string   "name",       null: false
@@ -25,4 +41,5 @@ ActiveRecord::Schema.define(version: 20150702205605) do
 
   add_index "subscribers", ["email"], name: "index_subscribers_on_email", unique: true, using: :btree
 
+  add_foreign_key "message_parts", "messages"
 end

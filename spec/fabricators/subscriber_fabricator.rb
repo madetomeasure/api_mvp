@@ -1,0 +1,4 @@
+Fabricator(:subscriber) do
+  email { Faker::Internet.email }
+  name { Faker::Name.name }
+end
