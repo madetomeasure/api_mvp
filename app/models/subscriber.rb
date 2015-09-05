@@ -11,5 +11,5 @@
 
 class Subscriber < ActiveRecord::Base
   has_many :deliveries
-  has_one :subscriber_datum, as: :datum
+  has_one :subscriber_datum
 end

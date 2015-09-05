@@ -4,9 +4,9 @@ class AddingDataHole < ActiveRecord::Migration
       t.integer :subscriber_id, null: false
       t.json :traits, null: false
 
-      t.datetime :created_at, null: false
+      t.timestamps null: false
 
-      t.index :subscriber_id
+      t.index :subscriber_id, unique: true
     end
   end
 end
