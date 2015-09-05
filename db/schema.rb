@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905185336) do
+ActiveRecord::Schema.define(version: 20150905185421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 20150905185336) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  create_table "subscriber_data", force: :cascade do |t|
+    t.integer  "subscriber_id", null: false
+    t.json     "traits",        null: false
+    t.datetime "created_at",    null: false
+  end
+
+  add_index "subscriber_data", ["subscriber_id"], name: "index_subscriber_data_on_subscriber_id", using: :btree
 
   create_table "subscribers", force: :cascade do |t|
     t.string   "name",       null: false

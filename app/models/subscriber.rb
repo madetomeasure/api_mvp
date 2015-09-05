@@ -11,4 +11,5 @@
 
 class Subscriber < ActiveRecord::Base
   has_many :deliveries
+  has_many :subscriber_data, as: :data
 end

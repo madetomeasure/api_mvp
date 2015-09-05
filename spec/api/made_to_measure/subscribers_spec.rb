@@ -8,6 +8,7 @@ describe 'MadeToMeasure::Subscribers' do
     let(:email) { 'flap@flappington.com' }
     let(:subscribers_path) { '/api/v0.1/subscribers' }
     let(:subscriber_path) { "/api/v0.1/subscribers/#{subscriber.id}" }
+    let(:subscriber_data_path) { "#{subscriber_path}/data" }
 
     describe 'POST /subscribers' do
       let(:payload) do
@@ -63,6 +64,23 @@ describe 'MadeToMeasure::Subscribers' do
         expect(subscriber.reload.name).to eq(name_change)
       end
     end
-  end
 
+    describe 'POST /subscribers/:id/data' do
+      let(:subscriber) do
+        Subscriber.create!(name: name, email: email)
+      end
+
+      it 'adds data to the hole' do
+        random_info = {
+          likes_orange: true,
+          age: 28,
+          favorite_color: "green"
+        }.to_json
+        
+        post subscriber_data_path, random_info
+
+        expect(SubscriberDatum.count).to eq(1)
+      end
+    end
+  end
 end
