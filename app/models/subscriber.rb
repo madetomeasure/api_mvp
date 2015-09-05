@@ -10,4 +10,5 @@
 #
 
 class Subscriber < ActiveRecord::Base
+  has_many :deliveries
 end
