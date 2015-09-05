@@ -11,11 +11,13 @@ module MadeToMeasure
       at_least_one_of :text, :html
     end
     post '/messages' do
-      Message.create!({
+      msg = Message.create!({
         subject: params[:subject],
         text: params[:text],
         html: params[:html],
       })
+
+      MessageDeliveryWorker.perform_async(msg.id)
     end
 
     desc 'Get a list of messages'

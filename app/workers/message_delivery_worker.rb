@@ -22,5 +22,8 @@ class MessageDeliveryWorker
     Subscriber.find_each do |sub|
       Mailer.delay.message_email(sub.id, msg.id)
     end
+
+    # FIXME message should have some sort of delivered boolean that gets
+    # set when all teh emailz are sent
   end
 end

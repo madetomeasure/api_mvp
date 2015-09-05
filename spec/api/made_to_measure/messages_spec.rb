@@ -8,6 +8,7 @@ describe 'MadeToMeasure::Messages' do
 
     describe 'POST /messages' do
       it 'creates a message' do
+        expect(MessageDeliveryWorker).to receive(:perform_async)
         post messages_path, {subject: subject, html: html}
         expect(Message.exists?(subject: subject)).to be_truthy
       end
