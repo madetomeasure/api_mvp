@@ -9,7 +9,7 @@ describe MessageDeliveryWorker do
   let!(:sub) { Fabricate(:subscriber) }
   let!(:sub2) { Fabricate(:subscriber) }
 
-  it 'delivers message to each subscriber' integration: true do
+  it 'delivers message to each subscriber', integration: true do
     described_class.new.perform(message.id)
     d = ActionMailer::Base.deliveries
     expect(d.first.to).to eql([sub.email])
@@ -20,7 +20,7 @@ describe MessageDeliveryWorker do
     expect(msg).to include(message.text_body)
   end
 
-  it 'creates delivery for each subscriber' integration: true do
+  it 'creates delivery for each subscriber', integration: true do
     described_class.new.perform(message.id)
     expect(sub.deliveries.first.message).to eql(message)
     expect(sub.deliveries.last.message).to eql(message)
