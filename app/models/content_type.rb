@@ -1,17 +1,19 @@
-class ContentType
+module ContentType
+  extend self
+
   MULTIPART = "multipart/alternative"
   TEXT = "text/plain"
   HTML = "text/html"
 
-  def self.multipart
+  def multipart
     MULTIPART
   end
 
-  def self.text
+  def text
     TEXT
   end
 
-  def self.html
+  def html
     HTML
   end
 end
