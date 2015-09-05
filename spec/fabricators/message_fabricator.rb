@@ -1,5 +1,5 @@
 Fabricator(:message) do
-  subject "victory"
+  subject { Faker::Lorem.sentence }
   html "<p>things</p>"
-  text "other stuff"
+  text { Faker::Company.bs }
 end
