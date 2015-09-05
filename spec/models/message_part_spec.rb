@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: message_parts
+#
+#  id         :integer          not null, primary key
+#  mime_type  :string           not null
+#  body       :text             not null
+#  message_id :integer          not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 describe MessagePart, type: :model do

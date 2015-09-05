@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: messages
+#
+#  id         :integer          not null, primary key
+#  subject    :string(77)       not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 describe Message, type: :model do
