@@ -5,6 +5,7 @@
 #
 class Message < ActiveRecord::Base
   has_many :parts, class_name: 'MessagePart', autosave: true
+  validates :parts, presence: true
 
   def html=(text)
     return unless text.present?
