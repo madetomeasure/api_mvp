@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706222818) do
+ActiveRecord::Schema.define(version: 20150905185336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "subscriber_id"
+    t.integer  "message_id"
+    t.datetime "delivered_at"
+  end
 
   create_table "message_parts", force: :cascade do |t|
     t.string   "mime_type",  null: false
