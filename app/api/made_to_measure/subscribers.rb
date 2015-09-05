@@ -28,17 +28,25 @@ module MadeToMeasure
       Subscriber.page(params[:page])
     end
 
-    desc 'Update a single subscriber'
+    desc 'Update a single subscriber (merge existing metadata)'
     params do
-      requires :name, type: String, desc: 'The subscribers name'
+      optional :name, type: String, desc: 'The subscribers name'
     end
-    post '/subscribers/:id' do
-      # Seems crazy but email is a write only object
-      # Or maybe it shouldn't be?
-      # TODO
+    patch '/subscribers/:id' do
+      UpdateSubscriber.with_existing(params)
+
+      SubscriberDatum.create(subscriber_id: params[:subscriber_id], traits: request.body.read)
       subscriber = Subscriber.find(params[:id])
       subscriber.update_attribute(:name, params[:name])
       subscriber
+    end
+
+    desc 'Update single subscriber (destroy existing metadata)'
+    params do
+      requires :name, type: String, desc: 'The subscribers name'
+    end
+    put '/subscribers/:id' do
+      UpdateSubscriber.without_existing(params)
     end
   end
 end
