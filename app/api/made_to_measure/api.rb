@@ -28,5 +28,6 @@ module MadeToMeasure
 
     mount MadeToMeasure::Subscribers
     mount MadeToMeasure::Messages
+    mount MadeToMeasure::Deliveries
   end
 end
