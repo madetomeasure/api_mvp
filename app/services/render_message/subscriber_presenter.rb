@@ -12,4 +12,8 @@ class RenderMessage::SubscriberPresenter < Mustache
   def name
     subscriber.name
   end
+
+  def metadata
+    subscriber.metadata
+  end
 end
