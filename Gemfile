@@ -17,6 +17,7 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'sinatra'
 gem 'sidekiq'
+gem 'validates_email_format_of'
 
 group :development do
   gem 'annotate'

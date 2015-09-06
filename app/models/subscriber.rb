@@ -10,5 +10,11 @@
 #
 
 class Subscriber < ActiveRecord::Base
+
   has_many :deliveries
+
+  validates :email, presence: true
+  
+  validates_email_format_of :email
+
 end
