@@ -22,11 +22,10 @@ gem 'sinatra'
 gem 'sidekiq'
 gem 'lru_redux'
 gem 'mustache'
-gem 'pry'
-gem 'benchmark-ips'
-gem 'mailcatcher'
 
 group :development do
+  gem 'benchmark-ips'
+  gem 'mailcatcher'
   gem 'annotate'
 end
 
