@@ -16,6 +16,8 @@ module MadeToMeasure
         html: params[:html])
 
       MessageDeliveryWorker.perform_async(msg.id)
+
+      msg
     end
 
     desc 'Get a list of messages'
