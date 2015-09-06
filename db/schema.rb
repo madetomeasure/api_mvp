@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20150905185336) do
     t.datetime "delivered_at"
   end
 
+  add_index "deliveries", ["subscriber_id", "message_id"], name: "index_deliveries_on_subscriber_id_and_message_id", unique: true, using: :btree
+
   create_table "message_parts", force: :cascade do |t|
     t.string   "mime_type",  null: false
     t.text     "body",       null: false

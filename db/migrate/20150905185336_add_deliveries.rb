@@ -4,6 +4,7 @@ class AddDeliveries < ActiveRecord::Migration
       t.integer :subscriber_id
       t.integer :message_id
       t.datetime :delivered_at
+      t.index [:subscriber_id, :message_id], unique: true
     end
   end
 end
