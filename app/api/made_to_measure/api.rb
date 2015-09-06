@@ -1,11 +1,14 @@
 module MadeToMeasure
+  # Global API configuration
+  # Mostly setting that the API is json
+  # Version 0.1
   class API < Grape::API
-    prefix  'api'
-    version 'v0.1', :using => :path
+    prefix 'api'
+    version 'v0.1', using: :path
 
     format :json
 
-    get :status do 
+    get :status do
       { status: 'my hovercraft is full of eels' }
     end
 

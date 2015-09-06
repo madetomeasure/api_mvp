@@ -1,6 +1,9 @@
+# MessageDeliveryWorker handles delivering messages
+# based on the Message model
 class MessageDeliveryWorker
   include Sidekiq::Worker
 
+  # Implements a mailer interface for the message delivery
   class Mailer < ActionMailer::Base
     default from: 'noreply@madetomeasure.io'
 
@@ -8,7 +11,8 @@ class MessageDeliveryWorker
       sub = Subscriber.find(subscriber_id)
       msg = Message.find(message_id)
 
-      # FIXME message needs to get rendered with user specific data with templating
+      # FIXME: message needs to get rendered with user specific
+      # data with templating
       mail(to: sub.email, subject: msg.subject) do |f|
         f.html { msg.html_body.to_s.html_safe }
         f.text { msg.text_body }
@@ -23,7 +27,7 @@ class MessageDeliveryWorker
       Mailer.delay.message_email(sub.id, msg.id)
     end
 
-    # FIXME message should have some sort of delivered boolean that gets
+    # FIXME: message should have some sort of delivered boolean that gets
     # set when all teh emailz are sent
   end
 end

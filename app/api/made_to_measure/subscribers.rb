@@ -1,17 +1,15 @@
 module MadeToMeasure
-
+  # This handles subscriber CRUD
   class Subscribers < Grape::API
-
     desc 'Create a subscriber'
     params do
       requires :name,  type: String, desc: 'A name.'
       requires :email, type: String, desc: 'A unique email address.'
     end
     post '/subscribers' do
-      Subscriber.create!({
+      Subscriber.create!(
         name:  params[:name],
-        email: params[:email]
-      })
+        email: params[:email])
     end
 
     desc 'Destroy a subscriber'
@@ -42,7 +40,5 @@ module MadeToMeasure
       subscriber.update_attribute(:name, params[:name])
       subscriber
     end
-
   end
-
 end

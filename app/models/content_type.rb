@@ -1,9 +1,9 @@
+# Handles the content types we accept
+# FIXME: This should probably be phased out for mime types
 module ContentType
-  extend self
-
-  MULTIPART = "multipart/alternative"
-  TEXT = "text/plain"
-  HTML = "text/html"
+  MULTIPART = 'multipart/alternative'
+  TEXT = 'text/plain'
+  HTML = 'text/html'
 
   def multipart
     MULTIPART
@@ -16,4 +16,6 @@ module ContentType
   def html
     HTML
   end
+
+  module_function :multipart, :text, :html
 end
