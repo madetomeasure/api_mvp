@@ -46,6 +46,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    benchmark-ips (2.3.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
@@ -316,6 +317,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   annotate
+  benchmark-ips
   byebug
   coffee-rails (~> 4.1.0)
   database_cleaner
