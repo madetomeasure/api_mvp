@@ -17,9 +17,8 @@ describe SubscriberMessageDeliveryWorker do
 
   it 'sets delivered_at' do
     now = Time.now
-    Timecop.freeze(now) do
-      subject.perform(delivery.id)
-      expect(delivery.reload.delivered_at).to eq(now)
-    end
+    allow(Time).to receive(:now).and_return(now)
+    subject.perform(delivery.id)
+    expect(delivery.reload.delivered_at).to eq(now)
   end
 end
