@@ -16,9 +16,7 @@ describe SubscriberMessageDeliveryWorker do
   end
 
   it 'sets delivered_at' do
-    now = Time.now
-    allow(Time).to receive(:now).and_return(now)
     subject.perform(delivery.id)
-    expect(delivery.reload.delivered_at).to eq(now)
+    expect(delivery.reload.delivered_at).to be_present
   end
 end
