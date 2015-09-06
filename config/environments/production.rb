@@ -69,7 +69,7 @@ Rails.application.configure do
     :address        => ENV['MAILGUN_SMTP_SERVER'],
     :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
     :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-    :domain         => 'YOUR_APPS_DOMAIN', #eg: 'yourappname.herokuapp.com'
+    :domain         => 'madetomeasure.herokuapp.com', #eg: 'yourappname.herokuapp.com'
     :authentication => :plain,
   }
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
