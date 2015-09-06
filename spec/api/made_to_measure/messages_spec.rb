@@ -26,7 +26,7 @@ describe 'MadeToMeasure::Messages' do
 
       it 'paginates' do
         get messages_path, page: 2
-        expect(response.body).to eq('[]')
+        expect(response.body).to eq('{"messages":[]}')
       end
     end
   end

@@ -1,8 +1,10 @@
 # FIXME (cmhobbs) add hard coded versions, jerk.
 source 'https://rubygems.org'
 
+gem 'active_model_serializers'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'grape'
+gem 'grape-active_model_serializers'
 gem 'hashie-forbidden_attributes'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
