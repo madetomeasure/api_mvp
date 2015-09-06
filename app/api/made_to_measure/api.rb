@@ -3,6 +3,10 @@ module MadeToMeasure
   # Mostly setting that the API is json
   # Version 0.1
   class API < Grape::API
+    use Rack::Auth::Basic do |username, password|
+      username == ENV['USERNAME'] &&
+      password == ENV['PASSWORD']
+    end 
     prefix 'api'
     version 'v0.1', using: :path
 

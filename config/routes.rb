@@ -8,7 +8,7 @@ end if Rails.env.production?
 MadeToMeasure::API.use Rack::Auth::Basic do |username, password|
   username == ENV['USERNAME'] &&
   password == ENV['PASSWORD']
-end if Rails.env.production?
+end 
 
 Rails.application.routes.draw do
   mount MadeToMeasure::API => '/'
