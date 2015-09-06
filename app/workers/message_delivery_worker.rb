@@ -5,25 +5,33 @@ class MessageDeliveryWorker
     default from: 'noreply@madetomeasure.io'
 
     def message_email(subscriber_id, message_id)
-      sub = Subscriber.find(subscriber_id)
-      msg = Message.find(message_id)
+      subscriber = Subscriber.find(subscriber_id)
+      message    = Message.find(message_id)
+
+      headers = {
+        to:       subscriber.email,
+        from:     message.from,
+        reply_to: message.reply_to,
+        subject:  message.subject
+      }
 
       # FIXME message needs to get rendered with user specific data with templating
-      mail(to: sub.email, subject: msg.subject) do |f|
-        f.html { msg.html_body.to_s.html_safe }
-        f.text { msg.text_body }
+      mail(headers) do |f|
+        f.html { message.html_body.to_s.html_safe }
+        f.text { message.text_body }
       end
     end
   end
 
   def perform(message_id)
-    msg = Message.find(message_id)
+    message = Message.find(message_id)
 
     Subscriber.find_each do |sub|
-      Mailer.delay.message_email(sub.id, msg.id)
+      Mailer.delay.message_email(sub.id, message.id)
     end
 
     # FIXME message should have some sort of delivered boolean that gets
     # set when all teh emailz are sent
   end
+
 end

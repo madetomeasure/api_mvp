@@ -6,16 +6,16 @@ describe MessageDeliveryWorker do
   end
 
   it 'delivers message to each subscriber' do
-    message = Fabricate(:message)
-    sub = Fabricate(:subscriber)
-    sub2 = Fabricate(:subscriber)
+    message     = Fabricate(:message)
+    subscriber  = Fabricate(:subscriber)
+    subscriber2 = Fabricate(:subscriber)
 
     described_class.new.perform(message.id)
-    d = ActionMailer::Base.deliveries
-    expect(d.first.to).to eql([sub.email])
-    expect(d.last.to).to eql([sub2.email])
+    deliveries = ActionMailer::Base.deliveries
+    expect(deliveries.first.to).to eql([subscriber.email])
+    expect(deliveries.last.to).to eql([subscriber2.email])
 
-    msg = d.first.to_s
+    msg = deliveries.first.to_s
     expect(msg).to include(message.html_body)
     expect(msg).to include(message.text_body)
   end
