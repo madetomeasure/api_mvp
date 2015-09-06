@@ -1,10 +1,15 @@
+# UpdateSubscriber will handle updating metadata and updating the subscriber
+# Either in a merge or a full delete of existing metadata
+#
+# PATCH /subscriber/:id -> with_existing(params) means merging with existing
+# PUT /subscriber/:id -> without_existing(params) means deleting the existing
 class UpdateSubscriber
   attr_reader :destroy_existing, :metadata, :subscriber, :subscriber_attributes
 
   def initialize(params, destroy_existing: nil)
     @destroy_existing = destroy_existing
     @metadata = params.fetch('metadata')
-    @subscriber_attributes = params.reject {|k,_| k == 'metadata' }
+    @subscriber_attributes = params.reject { |k, _| k == 'metadata' }
 
     subscriber_id = params.fetch('id')
 
