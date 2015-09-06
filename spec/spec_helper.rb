@@ -21,6 +21,7 @@ RSpec.configure do |config|
 
   config.around(:each) do |example|
     ActionMailer::Base.deliveries.clear
+    MustacheTemplateCache.clear
 
     DatabaseCleaner.cleaning do
       example.run

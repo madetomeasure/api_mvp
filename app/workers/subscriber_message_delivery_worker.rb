@@ -7,11 +7,12 @@ class SubscriberMessageDeliveryWorker
     def message_email(subscriber_id, message_id)
       sub = Subscriber.find(subscriber_id)
       msg = Message.find(message_id)
+      renderer = RenderMessage.new(msg, sub)
 
       # FIXME message needs to get rendered with user specific data with templating
       mail(to: sub.email, subject: msg.subject) do |f|
-        f.html { msg.html_body.to_s.html_safe }
-        f.text { msg.text_body }
+        f.html { renderer.html.html_safe }
+        f.text { renderer.text }
       end
     end
   end
