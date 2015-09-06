@@ -6,6 +6,8 @@
 #  subject    :string(77)       not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  from       :string
+#  reply_to   :string
 #
 
 # Message has a subject and parts
@@ -15,7 +17,11 @@
 #
 class Message < ActiveRecord::Base
   has_many :parts, class_name: 'MessagePart', autosave: true
+
   validates :parts, presence: true
+
+  validates_email_format_of :from
+  validates_email_format_of :reply_to, allow_nil: true
 
   def html=(text)
     return unless text.present?

@@ -22,7 +22,7 @@ gem 'sinatra'
 gem 'sidekiq'
 gem 'lru_redux'
 gem 'mustache'
-gem 'foreman'
+gem 'validates_email_format_of'
 
 group :development do
   gem 'benchmark-ips'
