@@ -16,7 +16,10 @@ describe SubscriberMessageDeliveryWorker do
   end
 
   it 'sets delivered_at' do
-    subject.perform(delivery.id)
-    expect(delivery.reload.delivered_at).to be_present
+    now = Time.now
+    Timecop.freeze(now) do
+      subject.perform(delivery.id)
+      expect(delivery.reload.delivered_at).to eq(now)
+    end
   end
 end
