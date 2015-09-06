@@ -7,9 +7,10 @@ module MadeToMeasure
     end
     get '/deliveries' do
       message_id = params[:message_id]
-      q = Delivery.all.order('delivered_at DESC NULLS FIRST')
-      q.where!(message_id: message_id) if message_id.present?
-      q.page(params[:page])
+      query = Delivery.all.order('delivered_at DESC NULLS FIRST')
+      query.where!(message_id: message_id) if message_id.present?
+
+      render_collection(query)
     end
   end
 end

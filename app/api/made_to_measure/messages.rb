@@ -23,7 +23,7 @@ module MadeToMeasure
       optional :page, type: Integer, desc: 'Page number'
     end
     get '/messages' do
-      Message.page(params[:page])
+      render_collection(Message.all)
     end
   end
 end

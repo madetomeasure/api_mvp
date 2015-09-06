@@ -86,7 +86,6 @@ describe 'MadeToMeasure::Subscribers' do
           patch subscriber_path, params
         end
       end
-
     end
   end
 end
