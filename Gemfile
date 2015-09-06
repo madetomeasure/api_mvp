@@ -22,6 +22,7 @@ gem 'sinatra'
 gem 'sidekiq'
 gem 'lru_redux'
 gem 'mustache'
+gem 'foreman'
 
 group :development do
   gem 'benchmark-ips'
