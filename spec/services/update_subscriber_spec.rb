@@ -1,19 +1,15 @@
 require 'rails_helper'
 
 describe UpdateSubscriber do
-  let(:subscriber) { Fabricate(:subscriber) }
-  let(:traits) do
+  let(:metadata) do
     {'gum_flavor' => 'Big red'}
   end
 
-  let!(:subscriber_datum) do
-    SubscriberDatum.create!(subscriber: subscriber, traits: traits)
-  end
-
+  let(:subscriber) { Fabricate(:subscriber, metadata: metadata) }
   let(:params) do
     {
       name: "Flapping ton the  3rd",
-      traits: {
+      metadata: {
         favorite_food: "Poutine"
       },
       id: subscriber.id
@@ -24,13 +20,13 @@ describe UpdateSubscriber do
     described_class.with_existing(params)
 
     datum = subscriber_datum.reload
-    expect(datum.traits).to eq(params.fetch('traits').merge(traits))
+    expect(datum.metadata).to eq(params.fetch('metadata').merge(metadata))
   end
 
   it 'updates without the existing data' do
     described_class.without_existing(params)
 
     datum = subscriber_datum.reload
-    expect(datum.traits).to eq(params.fetch('traits'))
+    expect(datum.metadata).to eq(params.fetch('metadata'))
   end
 end

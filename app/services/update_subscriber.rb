@@ -1,30 +1,25 @@
 class UpdateSubscriber
-  attr_reader :destroy_existing, :traits, :subscriber_datum,
+  attr_reader :destroy_existing, :metadata, :subscriber_datum,
               :subscriber, :subscriber_attributes
 
   def initialize(params, destroy_existing: nil)
     @destroy_existing = destroy_existing
-    @traits = params.fetch('traits')
-    @subscriber_attributes = params.reject {|k,_| k == 'traits' }
+    @metadata = params.fetch('metadata')
+    @subscriber_attributes = params.reject {|k,_| k == 'metadata' }
+
     subscriber_id = params.fetch('id')
-    @subscriber_datum = SubscriberDatum
-                          .find_or_initialize_by(subscriber_id: subscriber_id)
-    subscriber_datum.traits ||= {}
 
     @subscriber = Subscriber.find(subscriber_id)
   end
 
   def perform
-    Subscriber.transaction do
-      if destroy_existing
-        subscriber_datum.traits = traits
-      else
-        subscriber_datum.traits.merge!(traits)
-      end
-
-      subscriber_datum.save!
-      subscriber.update!(subscriber_attributes)
+    if destroy_existing
+      subscriber.metadata = metadata
+    else
+      subscriber.metadata.merge!(metadata)
     end
+
+    subscriber.update!(subscriber_attributes)
   end
 
   def self.with_existing(params)

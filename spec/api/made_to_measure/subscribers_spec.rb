@@ -63,7 +63,7 @@ describe 'MadeToMeasure::Subscribers' do
       let(:params) do
         {
           name: "New Name Flappington",
-          traits: {
+          metadata: {
             zomg: "Stuff"
           },
           id: subscriber.id.to_s
