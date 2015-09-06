@@ -65,13 +65,13 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address        => ENV['SMTP_HOST'],
-    :user_name      => ENV['SMTP_USER'],
-    :password       => ENV['SMTP_PASS'],
-    :domain         => 'madetomeasure.herokuapp.com', #eg: 'yourappname.herokuapp.com'
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'YOUR_APPS_DOMAIN', #eg: 'yourappname.herokuapp.com'
     :authentication => :plain,
   }
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
