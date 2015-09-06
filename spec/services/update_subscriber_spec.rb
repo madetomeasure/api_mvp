@@ -19,8 +19,8 @@ describe UpdateSubscriber do
   it 'updates with the existing data' do
     described_class.with_existing(params)
 
-    expect(subscriber.reload.metadata).to eq(params.fetch('metadata')
-                                            .merge(metadata))
+    result = subscriber.reload.metadata
+    expect(result).to eq(params.fetch('metadata').merge(metadata))
   end
 
   it 'updates without the existing data' do

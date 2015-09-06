@@ -9,11 +9,16 @@ class UpdateSubscriber
   def initialize(params, destroy_existing: nil)
     @destroy_existing = destroy_existing
     @metadata = params.fetch('metadata')
-    @subscriber_attributes = params.reject { |k, _| k == 'metadata' }
+    @subscriber_attributes = params.except('metadata')
+    @subscriber = Subscriber.find(params.fetch('id'))
+  end
 
-    subscriber_id = params.fetch('id')
+  def self.with_existing(params)
+    new(params, destroy_existing: false).perform
+  end
 
-    @subscriber = Subscriber.find(subscriber_id)
+  def self.without_existing(params)
+    new(params, destroy_existing: true).perform
   end
 
   def perform
@@ -24,13 +29,5 @@ class UpdateSubscriber
     end
 
     subscriber.update!(subscriber_attributes)
-  end
-
-  def self.with_existing(params)
-    new(params, destroy_existing: false).perform
-  end
-
-  def self.without_existing(params)
-    new(params, destroy_existing: true).perform
   end
 end
