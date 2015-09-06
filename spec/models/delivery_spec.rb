@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: deliveries
+#
+#  id            :integer          not null, primary key
+#  subscriber_id :integer
+#  message_id    :integer
+#  delivered_at  :datetime
+#
+
 require 'spec_helper'
 
 describe Delivery do
