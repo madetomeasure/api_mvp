@@ -6,7 +6,8 @@ module MadeToMeasure
     use Rack::Auth::Basic do |username, password|
       username == ENV['USERNAME'] &&
       password == ENV['PASSWORD']
-    end 
+    end if Rails.env.production?
+
     prefix 'api'
     version 'v0.1', using: :path
 
