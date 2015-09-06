@@ -1,7 +1,6 @@
 module MadeToMeasure
-
+  # Handles the message CRUD for the API
   class Messages < Grape::API
-
     desc 'Create a message'
     params do
       requires :subject, type: String, desc: 'A subject.'
@@ -11,11 +10,10 @@ module MadeToMeasure
       at_least_one_of :text, :html
     end
     post '/messages' do
-      msg = Message.create!({
+      msg = Message.create!(
         subject: params[:subject],
         text: params[:text],
-        html: params[:html],
-      })
+        html: params[:html])
 
       MessageDeliveryWorker.perform_async(msg.id)
     end
@@ -27,7 +25,5 @@ module MadeToMeasure
     get '/messages' do
       Message.page(params[:page])
     end
-
   end
-
 end
