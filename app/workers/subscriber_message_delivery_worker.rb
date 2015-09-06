@@ -1,6 +1,8 @@
+# Delivers email messages
 class SubscriberMessageDeliveryWorker
   include Sidekiq::Worker
 
+  # Handles mailing for the Messages
   class Mailer < ActionMailer::Base
     default from: 'noreply@madetomeasure.io'
 
@@ -9,7 +11,8 @@ class SubscriberMessageDeliveryWorker
       msg = Message.find(message_id)
       renderer = RenderMessage.new(msg, sub)
 
-      # FIXME message needs to get rendered with user specific data with templating
+      # FIXME: message needs to get rendered with user
+      # specific data with templating
       mail(to: sub.email, subject: msg.subject) do |f|
         f.html { renderer.html.html_safe }
         f.text { renderer.text }

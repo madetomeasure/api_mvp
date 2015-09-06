@@ -1,8 +1,10 @@
 module MadeToMeasure
+  # Handles queueing up deliveries for messages
   class Deliveries < Grape::API
     desc 'list message deliveries'
     params do
-      optional :message_id,  type: String, desc: 'ID of message to list deliveries for'
+      optional :message_id, type: String,
+                            desc: 'ID of message to list deliveries for'
       optional :page, type: Integer, desc: 'Page number'
     end
     get '/deliveries' do
