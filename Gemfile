@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'active_model_serializers'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'foreman'
 gem 'grape'
 gem 'grape-active_model_serializers'
 gem 'hashie-forbidden_attributes'

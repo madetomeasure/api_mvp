@@ -5,6 +5,11 @@ Sidekiq::Web.use Rack::Auth::Basic do |username, password|
   password == Rails.application.secrets[:sidekiq_password]
 end if Rails.env.production?
 
+MadeToMeasure::API.use Rack::Auth::Basic do |username, password|
+  username == ENV['USERNAME'] &&
+  password == ENV['PASSWORD']
+end if Rails.env.production?
+
 Rails.application.routes.draw do
   mount MadeToMeasure::API => '/'
 
