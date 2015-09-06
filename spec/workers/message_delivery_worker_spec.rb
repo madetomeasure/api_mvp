@@ -5,11 +5,11 @@ describe MessageDeliveryWorker do
     Sidekiq::Testing.inline! { example.run }
   end
 
-  it 'delivers message to each subscriber' do
-    message = Fabricate(:message)
-    sub = Fabricate(:subscriber)
-    sub2 = Fabricate(:subscriber)
+  let!(:message) { Fabricate(:message) }
+  let!(:sub) { Fabricate(:subscriber) }
+  let!(:sub2) { Fabricate(:subscriber) }
 
+  it 'delivers message to each subscriber', integration: true do
     described_class.new.perform(message.id)
     d = ActionMailer::Base.deliveries
     expect(d.first.to).to eql([sub.email])
@@ -18,5 +18,11 @@ describe MessageDeliveryWorker do
     msg = d.first.to_s
     expect(msg).to include(message.html_body)
     expect(msg).to include(message.text_body)
+  end
+
+  it 'creates delivery for each subscriber', integration: true do
+    described_class.new.perform(message.id)
+    expect(sub.deliveries.first.message).to eql(message)
+    expect(sub.deliveries.last.message).to eql(message)
   end
 end

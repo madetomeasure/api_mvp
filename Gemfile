@@ -32,6 +32,7 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'timecop'
   gem 'faker'
   gem 'fabrication'
 end
