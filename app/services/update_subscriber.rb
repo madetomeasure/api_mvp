@@ -1,6 +1,5 @@
 class UpdateSubscriber
-  attr_reader :destroy_existing, :metadata, :subscriber_datum,
-              :subscriber, :subscriber_attributes
+  attr_reader :destroy_existing, :metadata, :subscriber, :subscriber_attributes
 
   def initialize(params, destroy_existing: nil)
     @destroy_existing = destroy_existing
