@@ -23,6 +23,7 @@ gem 'sidekiq'
 gem 'lru_redux'
 gem 'mustache'
 gem 'pry'
+gem 'mailcatcher'
 
 group :development do
   gem 'annotate'
