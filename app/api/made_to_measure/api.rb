@@ -14,6 +14,14 @@ module MadeToMeasure
 
     formatter :json, Grape::Formatter::ActiveModelSerializers
 
+    helpers do
+      def render_collection(query)
+        page = params.fetch(:page, 1)
+        paginated = query.page(page)
+        render paginated, meta: { page: page, total: query.count, current_page_count: paginated.count }, meta_key: :pagination_info
+      end
+    end
+
     get :status do
       { status: 'my hovercraft is full of eels' }
     end

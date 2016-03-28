@@ -25,7 +25,7 @@ module MadeToMeasure
       optional :page, type: Integer, desc: 'Page number'
     end
     get '/subscribers' do
-      Subscriber.page(params[:page])
+      render_collection(Subscriber.all)
     end
 
     desc 'Update a single subscriber (merge existing metadata)'
